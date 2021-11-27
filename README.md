@@ -112,6 +112,25 @@ Note that you need to include submodules when cloning:
 ```
 git clone --recurse-submodules https://github.com/rtlabs-com/p-net.git
 ```
+编译
+```shell
+cmake -B build -S p-net -DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTING=OFF -DBUILD_SHARED_LIBS=ON -DUSE_SCHED_FIFO=ON
+cd build
+make -j12
+```
+Run the sample application:
+
+默认网卡eth0不一定存在，需要指定网卡，否则报错，无法读取mac地址。
+
+```shell
+sudo ./pn_dev -v -i eno1
+```
+网卡实际的ip会写入配置文件，下次启动时会自动设置网卡ip。
+如果需要初始化
+```shell
+sudo ./pn_dev -r
+```
+在PLC中安装GSD文件，组态硬件
 
 Dependencies
 ------------
